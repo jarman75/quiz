@@ -36,7 +36,22 @@ exports.answer = function (req, res) {
     res.render('quizes/answer', { quiz: req.quiz, respuesta: resultado});
 };
 
+//Get /quizes/new
+exports.new = function (req, res) {
+  var quiz = models.Quiz.build(  //crea objeto quiz
+    {tema: "Tema", pregunta: "Pregunta", respuesta: "Respuesta"}
+  );
+  res.render('quizes/new', {quiz: quiz});
+};
 
+exports.create = function (req, res) {
+  var quiz = models.Quiz.build ( req.body.quiz );
+
+  //guarda en DB los campos pregunta y respuestas de quiz
+  quiz.save( {fields: ["tema", "pregunta", "respuesta"]} ).then(function(){
+    res.redirect('/quizes');
+  })  //Redirección HTTP (URL relativo) lista de preguntas
+};
 
 exports.author = function (req, res) {
   res.render('author');
