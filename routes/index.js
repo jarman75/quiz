@@ -3,7 +3,8 @@ var router = express.Router();
 
 var quizController = require('../controllers/quiz_controller');
 
-/* GET home page. */
+
+// Página de entrada (home page)
 router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz' });
 });
@@ -11,6 +12,9 @@ router.get('/', function(req, res) {
 //router.get('/quizes/question', quizController.question);
 //router.get('/quizes/answer', quizController.answer);
 router.get('/author', quizController.author);
+
+// Autoload de comandos con :quizId
+router.param('quizId', quizController.load); //autoload :quizId
 
 //deinición de rutas de /quizes
 router.get ('/quizes', quizController.index);
