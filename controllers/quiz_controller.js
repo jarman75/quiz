@@ -57,9 +57,6 @@ exports.new = function (req, res) {
 exports.create = function(req, res) {
 	var quiz = models.Quiz.build( req.body.quiz );
 
-  console.log(err);
-  var err = quiz.validate();
-
   quiz
   .validate()
   .then(
